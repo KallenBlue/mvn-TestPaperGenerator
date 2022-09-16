@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.version1.mapper.QuestionMapper">
+    <!--id:唯一标示 property:实体类属性-->
+    <resultMap id="questionResultMap" type="com.version1.pojo.Question">
+        <result column="q_id" property="qID" />
+        <result column="created_time" property="createdTime"/>
+    </resultMap>
+    <select id="selectAllQuestions" resultMap="questionResultMap">
+        select * from questions;
+    </select>
+    <select id="selectQuestionByID" resultMap="questionResultMap">
+        select * from questions where q_id= #{id};
+    </select>
+</mapper>
