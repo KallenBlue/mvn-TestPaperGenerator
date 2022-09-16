@@ -22,8 +22,92 @@
 
         </div>
     </div>
-
 </nav>
+
+<!--题目难度选择-->
+<div class="ui container m-margin-top" >
+    <div class="ui middle aligned center aligned grid">
+        <div class="column">
+
+            <!--头部提示语句-->
+            <h2 class="ui image header">
+                <div class="content">
+                    题目难度选择
+                </div>
+            </h2>
+
+            <!--中部难度介绍部分-->
+            <div class="ui three column grid m-padded-tb-large">
+                <!--小学-->
+                <div class="column">
+                    <div class="ui fluid card">
+                        <div class="image">
+                            <img src="https://vkceyugu.cdn.bspapp.com/VKCEYUGU-0ecbe108-fe1f-4867-af7e-a5814b22090f/4dde954d-62a9-4a65-976e-6b4e15097d0d.png">
+                        </div>
+                        <div class="content">
+                            <p class="header">符号要求:+,-,*./</p>
+                            <p class="header">难度要求:只能有+,-,*./和()</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!--初中-->
+                <div class="column">
+                    <div class="ui fluid card">
+                        <div class="image">
+                            <img src="https://vkceyugu.cdn.bspapp.com/VKCEYUGU-0ecbe108-fe1f-4867-af7e-a5814b22090f/acffeda5-ab0f-4716-9c70-c3441196aec1.png">
+                        </div>
+                        <div class="content">
+                            <p class="header">符号要求:平方，开根号</p>
+                            <p class="header">难度要求:至少有一个平方或开根号</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!--高中-->
+                <div class="column">
+                    <div class="ui fluid card">
+                        <div class="image">
+                            <img src="https://vkceyugu.cdn.bspapp.com/VKCEYUGU-0ecbe108-fe1f-4867-af7e-a5814b22090f/bf3fcad5-871b-4fd1-84d1-5973132129ea.png">
+                        </div>
+                        <div class="content">
+                            <p class="header">符号要求:sin,cos,tan</p>
+                            <p class="header">难度要求:至少一个三角函数</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!--th:action="@{/choose}":把用户名和密码提交到它这个地方去-->
+            <!--难度及题目数量输入-->
+            <form class="ui large form center aligned" method="post" action="#" th:action="@{/choose}">
+                <div class="ui  segment"  style="background: rgba(255,255,255,0.8)">
+                    <div class="field">
+                        <div class="ui left icon input">
+                            <i class="book icon"></i>
+                            <input type="text" name="num" placeholder="请输入题目数量">
+                        </div>
+                    </div>
+                    <div class="field">
+                        <select class="ui fluid dropdown" name="school">
+                            <option value="primary">小学</option>
+                            <option value="junior">初中</option>
+                            <option value="senior">高中</option>
+                        </select>
+                    </div>
+                    <button class="ui fluid large teal submit button">开始做题</button>
+                </div>
+
+
+                <div class="ui error mini message"></div>
+                <!--有值的情况下才会显示；negative；红色提示-->
+
+            </form>
+
+
+        </div>
+    </div>
+</div>
 
 <!--底部栏-->
 <footer th:fragment="footer" class="ui segment m-padded-tb-big " style="background: rgba(255,255,255,0.9)">
@@ -36,6 +120,20 @@
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.js"></script>
 </th:block>
+
+<script>
+    $('.ui.form').form({
+        fields : {
+            num : {
+                identifier: 'num',
+                rules: [{
+                    type : 'empty',
+                    prompt: '请输入10-30中的一个题目数量'
+                }]
+            }
+        }
+    });
+</script>
 
 </body>
 </html>
