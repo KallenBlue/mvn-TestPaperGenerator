@@ -14,7 +14,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
 
-public class test {
+public class test1 {
     @Test
     public void testUserSelectByAccount() throws IOException {
         //1.加载mybatis的核心配置文件，获取SqlSessionFactory
@@ -27,8 +27,14 @@ public class test {
 //        List<User> userList = sqlSession.selectList("user.selectAllUserInfo");
         //3.1获取userMapper的代理对象
         UserMapper mapper = sqlSession.getMapper(UserMapper.class);
+
+
+
         User user = mapper.selectUserInfoByAccount("张三1");
+        List<User> users = mapper.selectAllUserInfo();
         System.out.println(user);
+        System.out.println("--------------");
+        System.out.println(users);
         //4.释放资源
         sqlSession.close();
     }

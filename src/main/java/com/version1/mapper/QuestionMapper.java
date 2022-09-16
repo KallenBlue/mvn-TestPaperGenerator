@@ -7,4 +7,5 @@ import java.util.List;
 public interface QuestionMapper {
     List<Question> selectAllQuestions();
     Question selectQuestionByID(int id);
+
 }
