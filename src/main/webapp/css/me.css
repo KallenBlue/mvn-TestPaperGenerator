@@ -94,6 +94,11 @@ footer{
     letter-spacing: 1px !important;
     line-height: 1.8;
 }
+.m-text-question{
+    font-weight: 500 !important;
+    letter-spacing: 2px !important;
+    line-height: 1.8;
+}
 .m-text-large{
     font-size: 20px;
     font-weight: 400 !important;
@@ -162,6 +167,12 @@ footer{
     margin-top: 1em !important;
     margin-bottom: 1em !important;
     margin-right: 2em !important;
+}
+
+.m-margin-question{
+    margin-top: 1em !important;
+    margin-bottom: 0.5em !important;
+    margin-right: 0.5em !important;
 }
 
 .m-margin-tb-tiny{

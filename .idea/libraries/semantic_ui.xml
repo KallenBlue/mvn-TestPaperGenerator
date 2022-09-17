@@ -1,0 +1,15 @@
+<component name="libraryTable">
+  <library name="semantic ui" type="kotlin.js">
+    <CLASSES>
+      <root url="file://$APPLICATION_CONFIG_DIR$/javascript/extLibs/__cdn.jsdelivr.net_npm_jquery.scrollto@2.1.2_jquery.scrollTo.js" />
+      <root url="file://$APPLICATION_CONFIG_DIR$/javascript/extLibs/__cdn.jsdelivr.net_npm_jquery.scrollto@2.1.3_jquery.scrollTo.js" />
+      <root url="file://$APPLICATION_CONFIG_DIR$/javascript/extLibs/http_cdn.jsdelivr.net_npm_jquery.scrollto@2.1.3_jquery.scrollTo.js" />
+      <root url="file://$APPLICATION_CONFIG_DIR$/javascript/extLibs/http_cdn.jsdelivr.net_npm_jquery@3.2_dist_jquery.js" />
+      <root url="file://$APPLICATION_CONFIG_DIR$/javascript/extLibs/http_cdn.jsdelivr.net_npm_semantic-ui@2.2.2_dist_semantic.js" />
+      <root url="file://$APPLICATION_CONFIG_DIR$/javascript/extLibs/http_cdn.jsdelivr.net_npm_semantic-ui@2.4.2_dist_semantic.js" />
+      <root url="file://$APPLICATION_CONFIG_DIR$/javascript/extLibs/http_cdn.jsdelivr.net_semantic-ui_2.2.4_semantic.min.js" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

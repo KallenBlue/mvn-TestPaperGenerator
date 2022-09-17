@@ -11,20 +11,150 @@
 <body>
 
 <!--//头部页面-->
-<nav th:fragment="menu" class="ui  attached segment m-padded-tb-top-non "  style="background: rgba(255,255,255,0.8);height: 60px">
+<nav th:fragment="menu" class="ui  attached segment m-padded-tb-top-non"  style="background: rgba(255,255,255,0.8);height: 60px">
     <div class="ui container">
         <div class="ui  secondary  menu " style="padding-top: -0.5em">
 
             <h1 class="ui header teal item m-text-header" style="padding-top: 0.1em;margin-top: 10px">Math</h1>
-            <a href="#" th:href="@{/login}" class="m-item item m-text" th:classappend><i class="home icon"></i>首页</a>
-            <a href="#" th:href="@{/choose}" class="m-item item m-text" th:classappend><i class="bookmark icon"></i>选题</a>
-            <a href="#" th:href="@{/question}" class="m-item item m-text" th:classappend><i class="tags icon"></i>做题</a>
+            <a href="#" th:href="@{/login}" class="m-item item m-text" ><i class="home icon"></i>首页</a>
+            <a href="#" th:href="@{/choose}" class="m-item item m-text" ><i class="bookmark icon"></i>选题</a>
+            <a href="#" th:href="@{/question}" class="m-item item m-text" ><i class="tags icon"></i>做题</a>
 
         </div>
     </div>
 
 </nav>
 
+<!--中部题目目录及做题界面-->
+<div class="m-padded-tb-center ui form">
+        <div class="ui container">
+            <div class="ui stackable grid">
+
+            <!--题目目录-->
+            <div class="five wide column">
+
+                    <!--目录头部文字-->
+                    <div class="ui secondary segment" style="background: rgba(255,255,255,0.9)">
+                        <div class="ui two column grid">
+                            <div class="column m-text m-black ">
+                                <i class="bookmark icon"></i>题目目录
+                            </div>
+                        </div>
+                    </div>
+
+                <!--题目选择-->
+                <div class="ui teal segment" >
+                    <div class="ui labeled button m-margin-question">
+                        <a href="#" class="ui  basic  button">1</a>
+                    </div>
+                    <div class="ui labeled button m-margin-question">
+                        <a href="#" class="ui  basic  button">1</a>
+                    </div>
+                    <div class="ui labeled button m-margin-question">
+                        <a href="#" class="ui  basic  button">1</a>
+                    </div>
+                    <div class="ui labeled button m-margin-question">
+                        <a href="#" class="ui  basic  button">1</a>
+                    </div>
+                    <div class="ui labeled button m-margin-question">
+                        <a href="#" class="ui  basic  button">1</a>
+                    </div>
+                    <div class="ui labeled button m-margin-question">
+                        <a href="#" class="ui  basic  button">1</a>
+                    </div>
+                    <div class="ui labeled button m-margin-question">
+                        <a href="#" class="ui  basic  button">1</a>
+                    </div>
+                    <div class="ui labeled button m-margin-question">
+                        <a href="#" class="ui  basic  button">1</a>
+                    </div>
+                    <div class="ui labeled button m-margin-question">
+                        <a href="#" class="ui  basic  button">1</a>
+                    </div>
+                </div>
+
+            </div>
+
+            <!--题目详情及换页-->
+            <div class="eleven wide column">
+
+                <!--题目-->
+                <div class="ui  segment  m-padded-tb-large" style="background: rgba(255,255,255,0.9)" >
+                    <div class="ui middle aligned mobile reversed stackable grid">
+                        <div class="eleven wide column">
+
+                            <!--标题-->
+                            <div class="ui grid m-margin-tb-tiny">
+                                <h3 class="ui header" >题目详情</h3>
+                            </div>
+
+                            <!--题目-->
+                            <div class="m-padded-tiny">
+                                <h3 class="ui m-text-large">12*123=</h3>
+                            </div>
+
+                            <!--答案列表-->
+                            <div class="ui form">
+                                <div class="grouped fields">
+                                    <h3 class="m-text-question">请选择你认为正确的答案:</h3>
+                                    <div class="field">
+                                        <div class="ui radio checkbox">
+                                            <input type="radio" name="A" checked="" tabindex="0" class="hidden">
+                                            <label>123</label>
+                                        </div>
+                                    </div>
+                                    <div class="field">
+                                        <div class="ui radio checkbox">
+                                            <input type="radio" name="B" tabindex="0" class="hidden">
+                                            <label>123</label>
+                                        </div>
+                                    </div>
+                                    <div class="field">
+                                        <div class="ui radio checkbox">
+                                            <input type="radio" name="C" tabindex="0" class="hidden">
+                                            <label>2432</label>
+                                        </div>
+                                    </div>
+                                    <div class="field">
+                                        <div class="ui radio checkbox">
+                                            <input type="radio" name="D" tabindex="0" class="hidden">
+                                            <label>24234</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+
+                <!--底部换题按钮-->
+                <div class="ui segment" style="background: rgba(255,255,255,0.9)" th:if="${page.totalPages}>1">
+                    <div class="ui middle aligned two column grid text-transparent">
+                        <!--左下按钮-->
+                        <div class="column">
+                            <a href="#" th:href="@{/(page=${page.number}-1)}" th:unless="${page.first}" class="ui mini teal  basic button">上一题</a>
+                        </div>
+                        <!--右下按钮-->
+                        <div class="right aligned column">
+                            <a href="#" th:href="@{/(page=${page.number}+1)}" th:unless="${page.last}" class="ui mini teal  basic button">下一题</a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            </div>
+        </div>
+</div>
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <!--底部栏-->
 <footer th:fragment="footer" class="ui segment m-padded-tb-big " style="background: rgba(255,255,255,0.9)">
     <div class="ui center aligned">
@@ -32,10 +162,12 @@
     </div>
 </footer >
 
-<th:block th:fragment="script">
-    <script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.js"></script>
-</th:block>
-
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.js"></script>
+<script>
+    $('.ui.radio.checkbox')
+        .checkbox()
+    ;
+</script>
 </body>
 </html>
