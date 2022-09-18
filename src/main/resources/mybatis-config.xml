@@ -5,7 +5,7 @@
 <configuration>
     <!--设置别名-->
     <typeAliases>
-        <package name="com.version1.pojo"/>
+        <package name="com.version2.pojo"/>
     </typeAliases>
     
     <!--
@@ -19,7 +19,7 @@
                 <property name="driver" value="com.mysql.cj.jdbc.Driver"/>
                 <property name="url" value="jdbc:mysql://localhost:3306/testgeneration?useSSL=false&amp;allowPublicKeyRetrieval=true&amp;serverTimezone=UTC"/>
                 <property name="username" value="root"/>
-                <property name="password" value="sao8527410"/>
+                <property name="password" value="1234"/>
             </dataSource>
         </environment>
     </environments>
@@ -27,6 +27,6 @@
 <!--        加载sql映射文件-->
 <!--        <mapper resource="com/version1/mapper/UserMapper.xml"/>-->
 <!--        Mapper代理方式-->
-        <package name="com.version1.mapper"/>
+        <package name="com.version2.mapper"/>
     </mappers>
 </configuration>
