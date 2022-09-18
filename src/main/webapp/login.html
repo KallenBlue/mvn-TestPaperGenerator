@@ -21,27 +21,25 @@
                     </div>
                 </h2>
                 <!--th:action="@{/login}":把用户名和密码提交到它这个地方去-->
-                <form class="ui large form" method="post" action="/mvn_TestPaperGenerator_war/LoginServlet">
+                <form class="ui large form" method="post" action="#">
                     <div class="ui  segment">
                         <div class="field">
                             <div class="ui left icon input">
                                 <i class="user icon"></i>
-                                <input type="text" name="username" placeholder="用户名">
+                                <input type="text" name="username" id="username" placeholder="用户名">
                             </div>
                         </div>
                         <div class="field">
                             <div class="ui left icon input">
                                 <i class="lock icon"></i>
-                                <input type="password" name="password" placeholder="密码">
+                                <input type="password" name="password" id="password" placeholder="密码">
                             </div>
                         </div>
-                        <button type="submit" class="ui fluid large teal submit button">登 录</button>
+                        <button type="submit"  class="ui fluid large teal submit button">登 录</button>
                     </div>
 
 
                     <div class="ui error mini message"></div>
-                    <div class="ui mini negative message" >用户名或密码错误</div>
-                    <!--有值的情况下才会显示；negative；红色提示-->
 
                 </form>
 
@@ -52,6 +50,8 @@
                         </a>
                     </div>
                 </div>
+
+                <button  id="login" class="ui fluid large teal s button">登 录</button>
 
             </div>
         </div>
@@ -98,6 +98,24 @@
             }
         }
     });
+    $(function () {
+        $('#login').on('click',function () {
+            let account = document.getElementById("username").value;
+            let password = document.getElementById("password").value;
+            $.ajax({
+                type: 'get',
+                url: 'http://localhost:8088/mvn_TestPaperGenerator_war/LoginValidate',
+                data:{
+                    account: account,
+                    password: password
+                },
+                success: function (res) {
+                    console.log(res)
+                }
+            })
+        })
+    })
+
 </script>
 
 </body>
