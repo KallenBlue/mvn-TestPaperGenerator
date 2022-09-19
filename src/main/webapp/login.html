@@ -21,7 +21,7 @@
                     </div>
                 </h2>
                 <!--th:action="@{/login}":把用户名和密码提交到它这个地方去-->
-                <form class="ui large form" method="post" action="#">
+                <form class="ui large form" method="post" action="choose.html">
                     <div class="ui  segment">
                         <div class="field">
                             <div class="ui left icon input">
@@ -51,7 +51,6 @@
                     </div>
                 </div>
 
-                <button  id="login" class="ui fluid large teal s button">登 录</button>
 
             </div>
         </div>
@@ -103,7 +102,7 @@
             let account = document.getElementById("username").value;
             let password = document.getElementById("password").value;
             $.ajax({
-                type: 'get',
+                type: 'post',
                 url: 'http://localhost:8088/mvn_TestPaperGenerator_war/LoginValidate',
                 data:{
                     account: account,
