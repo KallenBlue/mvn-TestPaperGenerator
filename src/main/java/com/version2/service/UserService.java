@@ -38,4 +38,12 @@ public class UserService {
         sqlSession.close();
         return existUser==null;
     }
+
+    public void updatePassword(User user){
+        SqlSession sqlSession = factory.openSession();
+        UserMapper mapper = sqlSession.getMapper(UserMapper.class);
+        mapper.updatePassword(user);
+        sqlSession.commit();
+        sqlSession.close();
+    }
 }
