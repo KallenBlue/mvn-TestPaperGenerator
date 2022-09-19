@@ -23,7 +23,7 @@ public class ChangePassword extends HttpServlet {
         String password = request.getParameter("password");
         if (password.equals(user.getPassword())){
             //与原来的密码相同
-            response.getWriter().write(JsonResultUtil.getJson("duplicate_password",new Object()));
+            response.getWriter().write(JsonResultUtil.getJsonFail(201,"duplicate_password"));
             return;
         }
         user.setPassword(password);

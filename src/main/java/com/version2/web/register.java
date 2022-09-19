@@ -31,7 +31,7 @@ public class register extends HttpServlet {
         if (!checkCode.equals(validate)){
             //返回验证码错误的消息
             //响应返回数据
-            response.getWriter().write(JsonResultUtil.getJson("wrong_code",new Object()));
+            response.getWriter().write(JsonResultUtil.getJsonFail(201,"wrong_code"));
 //            System.out.println("wrong_code:");
             return;
         }
@@ -51,13 +51,13 @@ public class register extends HttpServlet {
             accountMap.put("account",account);
             response.getWriter().write(JsonResultUtil.getJson(accountMap));
             //重定向到choose页面
-            String contextPath = request.getContextPath();
-            response.sendRedirect(contextPath+"/login.html");
+//            String contextPath = request.getContextPath();
+//            response.sendRedirect(contextPath+"/login.html");
 
         }
         else {
             //不满足注册条件，表示用户名已被注册
-            response.getWriter().write(JsonResultUtil.getJsonFail());
+            response.getWriter().write(JsonResultUtil.getJsonFail(201,"account_registered"));
         }
     }
 

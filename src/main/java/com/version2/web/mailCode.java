@@ -18,7 +18,7 @@ public class mailCode extends HttpServlet {
         String mail = request.getParameter("mail");
 
         //发送邮件，返回发送状态
-        String code = "";
+        String code;
         try {
             code = SendMailUtil.sendMail(mail,4);
             if (!"".equals(code)){
@@ -30,13 +30,12 @@ public class mailCode extends HttpServlet {
             }
             else {
                 //发送失败
-                response.getWriter().write(JsonResultUtil.getJsonFail());
+                response.getWriter().write(JsonResultUtil.getJsonFail(201,"code_is_empty"));
             }
         } catch (MessagingException e) {
             e.printStackTrace();
-            response.getWriter().write(JsonResultUtil.getJsonFail());
+            response.getWriter().write(JsonResultUtil.getJsonFail(202,"error"));
         }
-
     }
 
     @Override

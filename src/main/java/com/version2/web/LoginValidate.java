@@ -50,14 +50,14 @@ public class LoginValidate extends HttpServlet {
                 }
             }
             //响应返回数据
-//            response.getWriter().write(JsonResultUtil.getJson());
+            response.getWriter().write(JsonResultUtil.getJson());
             //重定向到choose页面
-            String contextPath = request.getContextPath();
-            response.sendRedirect(contextPath+"/choose.html");
+//            String contextPath = request.getContextPath();
+//            response.sendRedirect(contextPath+"/choose.html");
         }
         else{
             //登录失败
-            response.getWriter().write(JsonResultUtil.getJsonFail());
+            response.getWriter().write(JsonResultUtil.getJsonFail(201,"fail"));
         }
     }
 

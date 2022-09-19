@@ -17,16 +17,15 @@ public class answerValidate extends HttpServlet {
 
         String userAnswer = request.getParameter("answer");
         String questionID = request.getParameter("question_id");
-        System.out.println("userAnswer:"+userAnswer);
-        System.out.println("questionID:"+questionID);
+        System.out.println("userAnswer:" + userAnswer);
+        System.out.println("questionID:" + questionID);
         HttpSession session = request.getSession();
-        String rightAnswer = (String) session.getAttribute("answer"+questionID);
-        System.out.println("rightAnswer:"+rightAnswer);
-        if (userAnswer.equals(rightAnswer)){
+        String rightAnswer = (String) session.getAttribute("answer" + questionID);
+        System.out.println("rightAnswer:" + rightAnswer);
+        if (userAnswer.equals(rightAnswer)) {
             response.getWriter().write(JsonResultUtil.getJson("true"));
-        }
-        else {
-                response.getWriter().write(JsonResultUtil.getJson("false"));
+        } else {
+            response.getWriter().write(JsonResultUtil.getJsonFail(201,"false"));
         }
     }
 

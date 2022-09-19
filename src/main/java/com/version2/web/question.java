@@ -41,12 +41,12 @@ public class question extends HttpServlet {
                 data.put("questions", questionsInfo);
                 response.getWriter().write(JsonResultUtil.getJson(data));
             } else {
-                response.getWriter().write(JsonResultUtil.getJson("fail"));
+                response.getWriter().write(JsonResultUtil.getJsonFail(201,"questions_is_null"));
             }
         } catch (Exception NumberFormatException) {
             //参数错误返回
             //响应返回数据
-            response.getWriter().write(JsonResultUtil.getJson("wrong_param"));
+            response.getWriter().write(JsonResultUtil.getJsonFail(202,"wrong_param"));
         }
 
     }
