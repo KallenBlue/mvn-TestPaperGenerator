@@ -9,6 +9,7 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
+import java.net.URLEncoder;
 
 @WebServlet("/LoginValidate")
 public class LoginValidate extends HttpServlet {
@@ -31,8 +32,10 @@ public class LoginValidate extends HttpServlet {
         User user = service.login(account,password);
 
         if (user!=null){
-            //登录成功,将登录后的信息存储到cookie中
-            Cookie cookie = new Cookie("account",account);
+            //登录成功,将登录后的信息存储到cookie和session中
+            HttpSession session = request.getSession();
+            session.setAttribute("account",account);
+            Cookie cookie = new Cookie("account", URLEncoder.encode(account,"utf-8"));
             cookie.setMaxAge(60*60);
             response.addCookie(cookie);
             //删除未登录提示信息的cookie

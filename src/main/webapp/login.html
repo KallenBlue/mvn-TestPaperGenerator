@@ -1,16 +1,16 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:="http://www.w3.org/1999/xhtml">
-<head >
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title >登录界面</title>
+    <title>登录界面</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
-    <link rel="stylesheet" href="css/me.css" >
+    <link rel="stylesheet" href="css/me.css">
     <link rel="icon" href="images/icon.ico" type="image/x-icon">
 </head>
 <body>
 
-<div  class="m-container-small m-padded-tb-massive" style="max-width: 30em !important;">
+<div class="m-container-small m-padded-tb-massive" style="max-width: 30em !important;">
     <!--用户登录输入框-->
     <div class="ui container">
         <div class="ui middle aligned center aligned grid">
@@ -21,7 +21,7 @@
                     </div>
                 </h2>
                 <!--th:action="@{/login}":把用户名和密码提交到它这个地方去-->
-                <form class="ui large form" method="post" action="http://localhost:8088/mvn_TestPaperGenerator_war/LoginValidate">
+                <form class="ui large form" method="post" >
                     <div class="ui  segment">
                         <div class="field">
                             <div class="ui left icon input">
@@ -35,17 +35,17 @@
                                 <input type="password" name="password" id="password" placeholder="密码">
                             </div>
                         </div>
-                        <button type="submit"  class="ui fluid large teal submit button">登 录</button>
+
                     </div>
 
 
                     <div class="ui error mini message"></div>
-
                 </form>
+                <button  class="ui fluid large teal submit button" onclick="submitForm()">登 录</button>
 
                 <div class="ui segment">
                     <div class="field">
-                        <a href="register.html"  class="m-item item m-text m-teal ">
+                        <a href="register.html" class="m-item item m-text m-teal ">
                             <button class="ui fluid large teal button">注册</button>
                         </a>
                     </div>
@@ -67,55 +67,121 @@
 <br>
 
 <!--底部栏-->
-<footer  class="ui segment m-padded-tb-big " style="background: rgba(255,255,255,0.8)">
+<footer class="ui segment m-padded-tb-big " style="background: rgba(255,255,255,0.8)">
     <div class="ui center aligned">
-        <h4 class="ui header m-text-thin m-text-spaced m-opacity-mini center aligned" >欢迎进入lkl-td小初高数学学习网站</h4>
+        <h4 class="ui header m-text-thin m-text-spaced m-opacity-mini center aligned">欢迎进入lkl-td小初高数学学习网站</h4>
     </div>
-</footer >
+</footer>
 
 
-    <script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.js"></script>
 
+<script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.0.js"></script>
 
 <script>
-    $('.ui.form').form({
-        fields : {
-            username : {
-                identifier: 'username',
-                rules: [{
-                    type : 'empty',
-                    prompt: '请输入用户名'
-                }]
-            },
-            password : {
-                identifier: 'password',
-                rules: [{
-                    type : 'empty',
-                    prompt: '请输入密码'
-                }]
-            }
-        }
-    });
-    $(function () {
-        $('#login').on('click',function () {
-            let account = document.getElementById("username").value;
-            let password = document.getElementById("password").value;
-            $.ajax({
-                type: 'post',
-                url: 'http://localhost:8088/mvn_TestPaperGenerator_war/LoginValidate',
-                data:{
-                    account: account,
-                    password: password
-                },
-                success: function (res) {
-                    console.log(res)
-                }
-            })
-        })
-    })
+    // function click1(){
+    //     alert("cao")
+    //     /*let account = document.getElementById("username").value;
+    //     let password = document.getElementById("password").value;*/
+    //     var account = $("#account").val();
+    //     var password = $("#password").val();
+    //     $.ajax({
+    //         url: 'http://localhost:8088/mvn_TestPaperGenerator_war/LoginValidate',
+    //         type: 'post',
+    //         dataType:"json",
+    //         data: {
+    //             account: account,
+    //             password: password
+    //         },
+    //         success: function (res) {
+    //             console.log(res)
+    //             alert("ok")
+    //         },
+    //         error: function (res) {
+    //             alert("here")
+    //         }
+    //
+    //     })
+    // }
+    // document.getElementById('login').onclick=function () {
+    //
+    // };
+    // $('.ui.form').form({
+    //     fields: {
+    //         username: {
+    //             identifier: 'username',
+    //             rules: [{
+    //                 type: 'empty',
+    //                 prompt: '请输入用户名'
+    //             }]
+    //         },
+    //         password: {
+    //             identifier: 'password',
+    //             rules: [{
+    //                 type: 'empty',
+    //                 prompt: '请输入密码'
+    //             }]
+    //         }
+    //     }
+    // });
+    // $(function () {
+    //
+    // $('#login').on('click',function () {
+    //     let account = document.getElementById("username").value;
+    //     let password = document.getElementById("password").value;
+    //     $.ajax({
+    //         url: 'http://localhost:8088/mvn_TestPaperGenerator_war/LoginValidate',
+    //         type: 'post',
+    //
+    //         data:{
+    //             account: account,
+    //             password: password
+    //         },
+    //         success: function (res) {
+    //             console.log(res)
+    //             alert("ok")
+    //         },
+    //         error: function (res){
+    //             alert("here")
+    //         }
+    //
+    //     })
+    // })
+    // })
 
 </script>
-
+<script>
+    /*ajax可行版本*/
+    function submitForm() {
+        var account = $("#account").val();
+        var password = $("#password").val();
+        $.ajax({
+            url: 'http://localhost:8088/mvn_TestPaperGenerator_war/LoginValidate',
+            type: "POST",
+            dataType: "text",
+            //contentType:"application/json",
+            /*data: JSON.stringify({
+                username:account,
+                password:password
+            }),*/
+              data:{
+              account:account,
+              password:password
+            },
+            success: function (JsonResult) {
+                if(JsonResult.message=='fail'){
+                    alert("用户名或密码错误")
+                }
+                else if (JsonResult.message=='success'){
+                    alert("登录成功")
+                }
+            },
+            error: function (error) {
+                console.log(error)
+            }
+        });
+    }
+</script>
 </body>
 </html>

@@ -9,6 +9,17 @@ import org.apache.ibatis.session.SqlSessionFactory;
 public class UserService {
     SqlSessionFactory factory = SqlSessionFactoryUtils.getSqlSessionFactory();
 
+    public User selectUserByAccount(String account){
+        //获取SqlSession
+        SqlSession sqlSession = factory.openSession();
+        //获取UserMapper
+        UserMapper mapper = sqlSession.getMapper(UserMapper.class);
+
+        User user = mapper.selectUserByAccount(account);
+        sqlSession.close();
+        return user;
+    }
+
     public User login(String account, String password){
         //获取SqlSession
         SqlSession sqlSession = factory.openSession();
