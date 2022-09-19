@@ -12,7 +12,7 @@ import java.io.IOException;
 
 @WebServlet("/LoginValidate")
 public class LoginValidate extends HttpServlet {
-    private UserService service = new UserService();
+    private final UserService service = new UserService();
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -35,8 +35,19 @@ public class LoginValidate extends HttpServlet {
             Cookie cookie = new Cookie("account",account);
             cookie.setMaxAge(60*60);
             response.addCookie(cookie);
+            //删除未登录提示信息的cookie
+            Cookie[] loginCookie = request.getCookies();
+            for (Cookie c :
+                    loginCookie) {
+                String msg = c.getName();
+                if ("msg".equals(msg)){
+                    c.setMaxAge(0);
+                    response.addCookie(c);
+                    break;
+                }
+            }
             //响应返回数据
-            response.getWriter().write(JsonResultUtil.getJson());
+//            response.getWriter().write(JsonResultUtil.getJson());
             //重定向到choose页面
             String contextPath = request.getContextPath();
             response.sendRedirect(contextPath+"/choose.html");
