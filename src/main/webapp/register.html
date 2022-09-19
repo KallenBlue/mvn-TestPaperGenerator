@@ -21,7 +21,7 @@
                     </div>
                 </h2>
                 <!--th:action="@{/register}":把用户名和密码提交到它这个地方去-->
-                <form class="ui large form" method="post" action="register.html" >
+                <form class="ui large form" method="post" action="register.html" id="form1">
                     <div class="ui segment">
                         <div class="field">
                             <div class="ui left icon input">
@@ -63,6 +63,8 @@
                     <!--有值的情况下才会显示；negative；红色提示-->
 
                 </form>
+
+                <iframe id="iFrame" name="iFrame" src="about:blank" style="display:none;"></iframe>
 
             </div>
         </div>
