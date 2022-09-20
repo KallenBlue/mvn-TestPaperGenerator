@@ -34,12 +34,12 @@
                         <div class="ui grid">
                             <div class="eight wide column">
                                 <div class="left aligned column">
-                                    共  <p class="ui blue header m-inline-block" id="now"> 14 </p> 题
+                                    当前为 <p class="ui blue header m-inline-block" id="now"> 14 </p> 题
                                 </div>
                             </div>
                             <div class="eight wide column">
                                 <div class="left aligned column">
-                                    当前为 <p class="ui blue header m-inline-block" id="all"> 14 </p> 题
+                                    共 <p class="ui blue header m-inline-block" id="all"> 14 </p> 题
                                 </div>
                             </div>
                         </div>
@@ -71,25 +71,25 @@
                                     <p class="m-text-question">请选择你认为正确的答案</p>
                                     <div class="field">
                                         <div class="ui radio checkbox">
-                                            <input type="radio" name="choose" value="1" class="hidden">
+                                            <input type="radio" name="choose" value="0" class="hidden">
                                             <p id="choose1" style="margin-left: 30px">123</p>
                                         </div>
                                     </div>
                                     <div class="field">
                                         <div class="ui radio checkbox">
-                                            <input type="radio" name="choose" value="2" class="hidden" >
+                                            <input type="radio" name="choose" value="1" class="hidden" >
                                             <p id="choose2" style="margin-left: 30px">123</p>
                                         </div>
                                     </div>
                                     <div class="field">
                                         <div class="ui radio checkbox">
-                                            <input type="radio" name="choose" value="3" class="hidden">
+                                            <input type="radio" name="choose" value="2" class="hidden">
                                             <p id="choose3" style="margin-left: 30px">123</p>
                                         </div>
                                     </div>
                                     <div class="field">
                                         <div class="ui radio checkbox">
-                                            <input type="radio" name="choose" value="4" class="hidden">
+                                            <input type="radio" name="choose" value="3" class="hidden">
                                             <p id="choose4" style="margin-left: 30px">123</p>
                                         </div>
                                     </div>
@@ -99,11 +99,7 @@
                                 <div class="ui middle aligned two column grid text-transparent">
                                     <!--左下按钮-->
                                     <div class="column hidden">
-                                        <a href="" class="ui mini teal basic button" type="submit">下一题</a>
-                                    </div>
-                                    <!--右下按钮-->
-                                    <div class="right aligned column">
-                                        <a href="" class="ui mini teal submit basic button">提交</a>
+                                        <button class="ui mini teal basic button"  onclick="submitForm()" id="submit">下一题</button>
                                     </div>
                                 </div>
                             </div>
@@ -145,19 +141,55 @@
 
 </script>
 <script>
-
-        let value = localStorage.getItem("key");              // 取回 value 变量
-        let jsonValue = JSON.parse(value);                // 把字符串转换成 JSON 对象
-        document.getElementById("question").innerHTML = jsonValue.data.questions[jsonValue.data.len].question;
-        document.getElementById("choose1").innerHTML = jsonValue.data.questions[jsonValue.data.len].options[0];
-        document.getElementById("choose2").innerHTML = jsonValue.data.questions[jsonValue.data.len].options[1];
-        document.getElementById("choose3").innerHTML = jsonValue.data.questions[jsonValue.data.len].options[2];
-        document.getElementById("choose4").innerHTML = jsonValue.data.questions[jsonValue.data.len].options[3];
-        document.getElementById("now").innerHTML = jsonValue.data.len;
-        document.getElementById("all").innerHTML = jsonValue.data.questions.length;
-        jsonValue.data.len += 1;
-        value = JSON.stringify(jsonValue);                     // 将 JSON 对象 jsonValue 转化成字符串
-        localStorage.setItem("key", value);                    // 用 localStorage 保存转化好的的字符串
+    let value = localStorage.getItem("key");              // 取回 value 变量
+    let jsonValue = JSON.parse(value);                // 把字符串转换成 JSON 对象
+    document.getElementById("question").innerHTML = jsonValue.data.questions[jsonValue.data.len].question;
+    document.getElementById("choose1").innerHTML = jsonValue.data.questions[jsonValue.data.len].options[0];
+    document.getElementById("choose2").innerHTML = jsonValue.data.questions[jsonValue.data.len].options[1];
+    document.getElementById("choose3").innerHTML = jsonValue.data.questions[jsonValue.data.len].options[2];
+    document.getElementById("choose4").innerHTML = jsonValue.data.questions[jsonValue.data.len].options[3];
+    document.getElementById("now").innerHTML = jsonValue.data.len+1;
+    document.getElementById("all").innerHTML = jsonValue.data.questions.length;
+    if(jsonValue.data.len+1==jsonValue.data.questions.length){
+        document.getElementById("submit").innerHTML = "提交";
+    }
+</script>
+<script>
+    /*ajax可行版本*/
+    function submitForm() {
+        let answer = $(":radio[name=choose]:checked").val();
+        let question_id = jsonValue.data.len;
+        $.ajax({
+            url: 'http://localhost:8088/mvn_TestPaperGenerator_war/answerValidate',
+            type: "POST",
+            dataType: "json",
+            data:{
+                answer:jsonValue.data.questions[jsonValue.data.len].options[answer],
+                question_id:question_id
+            },
+            success: function (JsonResult) {
+                if (JsonResult.data=='true'){
+                    alert("答案正确")
+                    jsonValue.code+=1;
+                }
+                else{
+                    alert("答案错误")
+                }
+                if(jsonValue.data.len+1!=jsonValue.data.questions.length){
+                    jsonValue.data.len += 1;
+                    value = JSON.stringify(jsonValue);                     // 将 JSON 对象 jsonValue 转化成字符串
+                    localStorage.setItem("key", value);                    // 用 localStorage 保存转化好的的字符串
+                    window.location.href="question.html"
+                }
+                else{
+                    window.location.href="score.html"
+                }
+            },
+            error: function (error) {
+                console.log(error)
+            }
+        });
+    }
 </script>
 </body>
 </html>

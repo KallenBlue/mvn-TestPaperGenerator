@@ -35,7 +35,7 @@
         <div class="ui secondary column">
             <!--得分情况-->
             <div class="ui segment center" style="background: rgba(255,255,255,0.8)" >
-                <h3>得分为23</h3>
+                得分为<h3 id="score" style="margin-left: 80px;font-size: 80px">23</h3>
                 <!--底部按钮-->
                 <div class="ui middle aligned two column grid text-transparent">
                     <!--左下按钮-->
@@ -76,7 +76,9 @@
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.js"></script>
 <script>
-
+    let value = localStorage.getItem("key");              // 取回 value 变量
+    let jsonValue = JSON.parse(value);                // 把字符串转换成 JSON 对象
+    document.getElementById("score").innerHTML=jsonValue.code/jsonValue.data.questions.length*100;
 </script>
 </body>
 </html>

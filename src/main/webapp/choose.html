@@ -141,6 +141,7 @@
                     // 存储 localStorage 数据为 Json 格式
 
                     JsonResult.data.len=0;
+                    JsonResult.code=0;
 
                     let value = JSON.stringify(JsonResult);                     // 将 JSON 对象 jsonValue 转化成字符串
                     localStorage.setItem("key", value);                    // 用 localStorage 保存转化好的的字符串
