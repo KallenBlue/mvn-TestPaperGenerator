@@ -137,7 +137,6 @@
     $('.ui.radio.checkbox')
         .checkbox()
     ;
-    // 读取 localStorage 中 Json 格式数据,并替换页面内容
 
 </script>
 <script>
@@ -169,12 +168,9 @@
             },
             success: function (JsonResult) {
                 if (JsonResult.data=='true'){
-                    alert("答案正确")
                     jsonValue.code+=1;
                 }
-                else{
-                    alert("答案错误")
-                }
+
                 if(jsonValue.data.len+1!=jsonValue.data.questions.length){
                     jsonValue.data.len += 1;
                     value = JSON.stringify(jsonValue);                     // 将 JSON 对象 jsonValue 转化成字符串

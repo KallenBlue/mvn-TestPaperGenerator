@@ -80,78 +80,6 @@
 <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.0.js"></script>
 
 <script>
-    // function click1(){
-    //     alert("cao")
-    //     /*let account = document.getElementById("username").value;
-    //     let password = document.getElementById("password").value;*/
-    //     var account = $("#account").val();
-    //     var password = $("#password").val();
-    //     $.ajax({
-    //         url: 'http://localhost:8088/mvn_TestPaperGenerator_war/LoginValidate',
-    //         type: 'post',
-    //         dataType:"json",
-    //         data: {
-    //             account: account,
-    //             password: password
-    //         },
-    //         success: function (res) {
-    //             console.log(res)
-    //             alert("ok")
-    //         },
-    //         error: function (res) {
-    //             alert("here")
-    //         }
-    //
-    //     })
-    // }
-    // document.getElementById('login').onclick=function () {
-    //
-    // };
-    // $('.ui.form').form({
-    //     fields: {
-    //         username: {
-    //             identifier: 'username',
-    //             rules: [{
-    //                 type: 'empty',
-    //                 prompt: '请输入用户名'
-    //             }]
-    //         },
-    //         password: {
-    //             identifier: 'password',
-    //             rules: [{
-    //                 type: 'empty',
-    //                 prompt: '请输入密码'
-    //             }]
-    //         }
-    //     }
-    // });
-    // $(function () {
-    //
-    // $('#login').on('click',function () {
-    //     let account = document.getElementById("username").value;
-    //     let password = document.getElementById("password").value;
-    //     $.ajax({
-    //         url: 'http://localhost:8088/mvn_TestPaperGenerator_war/LoginValidate',
-    //         type: 'post',
-    //
-    //         data:{
-    //             account: account,
-    //             password: password
-    //         },
-    //         success: function (res) {
-    //             console.log(res)
-    //             alert("ok")
-    //         },
-    //         error: function (res){
-    //             alert("here")
-    //         }
-    //
-    //     })
-    // })
-    // })
-
-</script>
-<script>
     /*ajax可行版本*/
     function submitForm() {
         var account = $("#account").val();
@@ -160,11 +88,6 @@
             url: 'http://localhost:8088/mvn_TestPaperGenerator_war/LoginValidate',
             type: "POST",
             dataType: "json",
-            //contentType:"application/json",
-            /*data: JSON.stringify({
-                username:account,
-                password:password
-            }),*/
               data:{
               account:account,
               password:password

@@ -126,18 +126,12 @@
             url: 'http://localhost:8088/mvn_TestPaperGenerator_war/question',
             type: "POST",
             dataType: "json",
-            //contentType:"application/json",
-            /*data: JSON.stringify({
-                username:account,
-                password:password
-            }),*/
             data:{
                 question:question,
                 school:school
             },
             success: function (JsonResult) {
                 if(JsonResult.message=='success'){
-                    alert("生成成功")
                     // 存储 localStorage 数据为 Json 格式
 
                     JsonResult.data.len=0;
@@ -148,9 +142,6 @@
 
                     window.location.href='question.html'
 
-                }
-                else {
-                    alert("生成失败")
                 }
             },
             error: function (error) {
