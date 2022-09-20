@@ -9,7 +9,6 @@
     <link rel="icon" href="images/icon.ico" type="image/x-icon">
 </head>
 <body>
-
 <!--//头部页面-->
 <nav class="ui  attached segment m-padded-tb-top-non"  style="background: rgba(255,255,255,0.8);height: 60px">
     <div class="ui container">
@@ -35,12 +34,12 @@
                         <div class="ui grid">
                             <div class="eight wide column">
                                 <div class="left aligned column">
-                                    共  <h3 class="ui blue header m-inline-block" > 14 </h3> 题
+                                    共  <p class="ui blue header m-inline-block" id="now"> 14 </p> 题
                                 </div>
                             </div>
                             <div class="eight wide column">
                                 <div class="left aligned column">
-                                    当前为 <h3 class="ui blue header m-inline-block" > 14 </h3> 题
+                                    当前为 <p class="ui blue header m-inline-block" id="all"> 14 </p> 题
                                 </div>
                             </div>
                         </div>
@@ -63,35 +62,35 @@
 
                             <!--题目-->
                             <div class="m-padded-tiny">
-                                <h3 class="ui m-text-large">12*123=</h3>
+                                <p class="ui m-text-large" id="question">12*123=</p>
                             </div>
 
                             <!--答案列表-->
                             <div class="ui form">
                                 <div class="grouped fields">
-                                    <h3 class="m-text-question">请选择你认为正确的答案</h3>
+                                    <p class="m-text-question">请选择你认为正确的答案</p>
                                     <div class="field">
                                         <div class="ui radio checkbox">
                                             <input type="radio" name="choose" value="1" class="hidden">
-                                            <label>123</label>
+                                            <p id="choose1" style="margin-left: 30px">123</p>
                                         </div>
                                     </div>
                                     <div class="field">
                                         <div class="ui radio checkbox">
-                                            <input type="radio" name="choose" value="2" class="hidden">
-                                            <label>123</label>
+                                            <input type="radio" name="choose" value="2" class="hidden" >
+                                            <p id="choose2" style="margin-left: 30px">123</p>
                                         </div>
                                     </div>
                                     <div class="field">
                                         <div class="ui radio checkbox">
                                             <input type="radio" name="choose" value="3" class="hidden">
-                                            <label>2432</label>
+                                            <p id="choose3" style="margin-left: 30px">123</p>
                                         </div>
                                     </div>
                                     <div class="field">
                                         <div class="ui radio checkbox">
                                             <input type="radio" name="choose" value="4" class="hidden">
-                                            <label>24234</label>
+                                            <p id="choose4" style="margin-left: 30px">123</p>
                                         </div>
                                     </div>
                                 </div>
@@ -142,6 +141,23 @@
     $('.ui.radio.checkbox')
         .checkbox()
     ;
+    // 读取 localStorage 中 Json 格式数据,并替换页面内容
+
+</script>
+<script>
+
+        let value = localStorage.getItem("key");              // 取回 value 变量
+        let jsonValue = JSON.parse(value);                // 把字符串转换成 JSON 对象
+        document.getElementById("question").innerHTML = jsonValue.data.questions[jsonValue.data.len].question;
+        document.getElementById("choose1").innerHTML = jsonValue.data.questions[jsonValue.data.len].options[0];
+        document.getElementById("choose2").innerHTML = jsonValue.data.questions[jsonValue.data.len].options[1];
+        document.getElementById("choose3").innerHTML = jsonValue.data.questions[jsonValue.data.len].options[2];
+        document.getElementById("choose4").innerHTML = jsonValue.data.questions[jsonValue.data.len].options[3];
+        document.getElementById("now").innerHTML = jsonValue.data.len;
+        document.getElementById("all").innerHTML = jsonValue.data.questions.length;
+        jsonValue.data.len += 1;
+        value = JSON.stringify(jsonValue);                     // 将 JSON 对象 jsonValue 转化成字符串
+        localStorage.setItem("key", value);                    // 用 localStorage 保存转化好的的字符串
 </script>
 </body>
 </html>

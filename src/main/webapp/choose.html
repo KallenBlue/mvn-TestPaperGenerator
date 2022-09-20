@@ -86,7 +86,7 @@
                         </div>
                     </div>
                     <div class="field">
-                        <select class="ui fluid dropdown" name="school">
+                        <select class="ui fluid dropdown" name="school" id="school">
                             <option value="小学">小学</option>
                             <option value="初中">初中</option>
                             <option value="高中">高中</option>
@@ -118,12 +118,12 @@
     <script src="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.js"></script>
 
 <script>
-    /*ajax可行版本*/
+    /*获取题目*/
     function submitForm() {
         let question = $("#num").val();
         let school = $("#school").val();
         $.ajax({
-            url: 'http://localhost:8088/mvn_TestPaperGenerator_war/LoginValidate',
+            url: 'http://localhost:8088/mvn_TestPaperGenerator_war/question',
             type: "POST",
             dataType: "json",
             //contentType:"application/json",
@@ -138,6 +138,15 @@
             success: function (JsonResult) {
                 if(JsonResult.message=='success'){
                     alert("生成成功")
+                    // 存储 localStorage 数据为 Json 格式
+
+                    JsonResult.data.len=0;
+
+                    let value = JSON.stringify(JsonResult);                     // 将 JSON 对象 jsonValue 转化成字符串
+                    localStorage.setItem("key", value);                    // 用 localStorage 保存转化好的的字符串
+
+                    window.location.href='question.html'
+
                 }
                 else {
                     alert("生成失败")
