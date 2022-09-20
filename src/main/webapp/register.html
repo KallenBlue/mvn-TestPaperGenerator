@@ -21,12 +21,12 @@
                     </div>
                 </h2>
                 <!--th:action="@{/register}":把用户名和密码提交到它这个地方去-->
-                <form class="ui large form" method="post" action="register.html" id="form1">
+                <form class="ui large form" method="post"  id="form1" name="form1" action="http://localhost:8088/mvn_TestPaperGenerator_war/register">
                     <div class="ui segment">
                         <div class="field">
                             <div class="ui left icon input">
                                 <i class="user icon"></i>
-                                <input type="text" name="username" placeholder="用户名">
+                                <input type="text" name="account" placeholder="用户名">
                             </div>
                         </div>
                         <div class="field">
@@ -38,24 +38,24 @@
                         <div class="field">
                             <div class="ui left icon input">
                                 <i class="lock icon"></i>
-                                <input type="password" name="repassword" placeholder="请再次输入密码">
+                                <input type="password" id="repassword" placeholder="请再次输入密码">
                             </div>
                         </div>
                         <div class="field">
                             <div class="ui left icon input">
                                 <i class="mail icon"></i>
-                                <input type="text" name="mail" placeholder="请输入邮箱">
+                                <input type="text"  placeholder="请输入邮箱">
+                                <button type="button" class="ui button" id="mail">发送验证码</button>
                             </div>
                         </div>
                         <div class="field">
                             <div class="ui left icon input">
                                 <i class="lock icon"></i>
                                 <input  name="verify" placeholder="请输入验证码">
-                                <div class="ui submit button">发送验证码</div>
                             </div>
                         </div>
 
-                        <button class="ui fluid large teal submit button">注   册</button>
+                        <button class="ui fluid large teal submit button"  id="register">注   册</button>
                     </div>
 
 
@@ -86,10 +86,16 @@
 
 
 <script>
+    // 设置点击submit之后不刷新当前页面
+    var form1 = document.getElementById('form1');
+    console.log(form1);
+    $("#form1").attr("target","iFrame");
+
+
     $('.ui.form').form({
         fields : {
-            username : {
-                identifier: 'username',
+            account : {
+                identifier: 'account',
                 rules: [{
                     type : 'empty',
                     prompt: '请输入用户名'
