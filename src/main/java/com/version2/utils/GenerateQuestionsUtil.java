@@ -8,7 +8,16 @@ public class GenerateQuestionsUtil {
     //符号集
     private static final String[] symbols = {"+", "-", "*", "/"};
     private static final String[] highSymbols = {"sin", "cos", "tan"};
+    static Random random = new Random(System.currentTimeMillis());
 
+    private static boolean isRepeat(String[] options, int index){
+        for (int i = 0; i < index; i++) {
+            if (options[index].equals(options[i])){
+                return true;
+            }
+        }
+        return false;
+    }
     public static String[] getOptions(String question) {
         Random random = new Random(System.currentTimeMillis());
         String[] options = new String[4];
@@ -16,7 +25,17 @@ public class GenerateQuestionsUtil {
         System.out.println("question:"+question+"  rightAnswer:"+rightAnswer);
         options[0] = rightAnswer.equals("NaN") ? "NaN" : rightAnswer;
         for (int i = 1; i < options.length; i++) {
-            options[i] = String.valueOf(random.nextInt(9) + 1 + Double.parseDouble(rightAnswer));
+            boolean flag = random.nextBoolean();
+            
+            do {
+                if (flag){
+                    options[i] = String.valueOf(random.nextInt(20) + Double.parseDouble(rightAnswer));
+                }
+                else {
+                    options[i] = String.valueOf(Double.parseDouble(rightAnswer) - random.nextInt(20));
+                }
+            }while (isRepeat(options,i));
+
         }
         return options;
     }
@@ -201,8 +220,8 @@ public class GenerateQuestionsUtil {
      * @return 正确答案的位置
      */
     public static int shuffleOptions(String[] options) {
-        Random random = new Random(System.currentTimeMillis());
         int index = random.nextInt(4);
+        System.out.println(index);
         String tmp = options[index];
         options[index] = options[0];
         options[0] = tmp;
