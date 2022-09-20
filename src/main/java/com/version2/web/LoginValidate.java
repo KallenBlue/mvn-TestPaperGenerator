@@ -1,6 +1,5 @@
 package com.version2.web;
 
-import com.alibaba.fastjson2.JSONObject;
 import com.version2.pojo.User;
 import com.version2.service.UserService;
 import com.version2.utils.JsonResultUtil;
@@ -51,7 +50,7 @@ public class LoginValidate extends HttpServlet {
             }
             //响应返回数据
             response.getWriter().write(JsonResultUtil.getJson());
-            //重定向到choose页面
+            //重定向到choose页面  
 //            String contextPath = request.getContextPath();
 //            response.sendRedirect(contextPath+"/choose.html");
         }

@@ -2,8 +2,6 @@ package com.version2.utils;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.Random;
 
 public class GenerateQuestionsUtil {
@@ -199,7 +197,7 @@ public class GenerateQuestionsUtil {
     /**
      * 打乱选项
      *
-     * @param options
+     * @param options 选项
      * @return 正确答案的位置
      */
     public static int shuffleOptions(String[] options) {

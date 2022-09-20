@@ -1,7 +1,5 @@
 package com.version2.web.filter;
 
-import com.version2.utils.JsonResultUtil;
-
 import javax.servlet.*;
 import javax.servlet.annotation.*;
 import javax.servlet.http.Cookie;
