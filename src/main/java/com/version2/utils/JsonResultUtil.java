@@ -38,6 +38,13 @@ public class JsonResultUtil {
         return String.valueOf(json);
     }
 
+    public static String getJson(int code,String message){
+        JSONObject json = new JSONObject();
+        json.put("code", code);
+        json.put("message", message);
+        json.put("data", new Object());
+        return String.valueOf(json);
+    }
     public static String getJson(int code,String message,Object data){
         JSONObject json = new JSONObject();
         json.put("code", code);

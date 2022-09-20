@@ -26,7 +26,7 @@ public class GenerateQuestionsUtil {
         options[0] = rightAnswer.equals("NaN") ? "NaN" : rightAnswer;
         for (int i = 1; i < options.length; i++) {
             boolean flag = random.nextBoolean();
-            
+
             do {
                 if (flag){
                     options[i] = String.valueOf(random.nextInt(20) + Double.parseDouble(rightAnswer));

@@ -17,16 +17,23 @@ public class ChangePassword extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
         response.setContentType("text/json;charset=utf-8");
 
-        String account = request.getParameter("account");
-
+        HttpSession session = request.getSession();
+        String account = (String) session.getAttribute("account");
         User user = service.selectUserByAccount(account);
-        String password = request.getParameter("password");
-        if (password.equals(user.getPassword())){
-            //与原来的密码相同
-            response.getWriter().write(JsonResultUtil.getJsonFail(201,"duplicate_password"));
+        String realPassword = user.getPassword();
+        String originPassword = request.getParameter("origin_password");
+        if (!realPassword.equals(originPassword)){
+            //密码错误
+            response.getWriter().write(JsonResultUtil.getJson(201,"wrong_password"));
             return;
         }
-        user.setPassword(password);
+        String newPassword = request.getParameter("new_password");
+        if (newPassword.equals(originPassword)){
+            //与原来的密码相同
+            response.getWriter().write(JsonResultUtil.getJsonFail(202,"duplicate_password"));
+            return;
+        }
+        user.setPassword(newPassword);
         service.updatePassword(user);
         response.getWriter().write(JsonResultUtil.getJson());
     }
