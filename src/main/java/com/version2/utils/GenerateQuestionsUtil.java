@@ -166,9 +166,9 @@ public class GenerateQuestionsUtil {
     }
 
     private static String calculatePH(String question) {
-        while (question.contains("^")) {
+        while (question.contains("²")) {
             //符号位置
-            int symbolIndex = question.indexOf("^");
+            int symbolIndex = question.indexOf("²");
             String preOperand = getPreSymbolNum(question, symbolIndex);
             double result = Math.pow(Double.parseDouble(preOperand), 2);
             question = replaceQuestionWithPreOperand(question, result, preOperand, symbolIndex,1);
@@ -263,11 +263,19 @@ public class GenerateQuestionsUtil {
 
             //是否有括号
             boolean isBracketIllegal = bracketStart < bracketEnd;
+            //至少有一次高中符号
+            boolean highSymbolExist = false;
             int[] operands = new int[operandsNumber];
             for (int i = 0; i < operandsNumber; i++) {
 
                 //是否加高中符号
-                boolean addHighSymbol = operandsNumber == 1 || random.nextBoolean();
+                boolean addHighSymbol = operandsNumber==1||random.nextBoolean();
+                if (addHighSymbol){
+                    highSymbolExist = true;
+                }
+                if (i==operandsNumber-1&&!highSymbolExist){
+                    addHighSymbol=true;
+                }
                 //是否加根号
                 boolean addRadical = !addHighSymbol && random.nextBoolean();
                 //是否加平方
@@ -300,7 +308,7 @@ public class GenerateQuestionsUtil {
                 question.append(operands[i]);
                 //普通平方
                 if (addSquare && squareNum > 0) {
-                    question.append("^");
+                    question.append("²");
                     squareNum--;
                 }
                 if (isBracketIllegal && i == bracketEnd) {
@@ -309,7 +317,7 @@ public class GenerateQuestionsUtil {
                     question.append(")");
                     //括号外平方
                     if (outsideSquare && squareNum > 0) {
-                        question.append("^");
+                        question.append("²");
                         squareNum--;
                     }
                 }
@@ -348,18 +356,27 @@ public class GenerateQuestionsUtil {
             int squareNum = juniorSymbolNum - RadicalNum;
             //是否有括号
             boolean isBracketIllegal = bracketStart < bracketEnd;
+            //是否出现初中符号
+            boolean juniorSymbolExist = false;
             int[] operands = new int[operandsNumber];
             for (int i = 0; i < operandsNumber; i++) {
                 //是否加根号
                 boolean addRadical = operandsNumber == 1 ? RadicalNum == 1 : random.nextBoolean();
                 //是否加平方
                 boolean addSquare = operandsNumber == 1 ? !addRadical : !addRadical && random.nextBoolean();
+                if (i==operandsNumber-1&&!juniorSymbolExist){
+                    RadicalNum++;
+                    squareNum++;
+                    addRadical = random.nextBoolean();
+                    addSquare = !addRadical;
+                }
                 operands[i] = random.nextInt(100) + 1;
                 if (isBracketIllegal && i == bracketStart) {
                     //在括号外加根号
                     boolean outsideRadical = random.nextBoolean();
                     if (outsideRadical && RadicalNum > 0) {
                         question.append("√");
+                        juniorSymbolExist=true;
                         RadicalNum--;
                     }
                     question.append("(");
@@ -367,12 +384,16 @@ public class GenerateQuestionsUtil {
                 //普通根号
                 if (addRadical && RadicalNum > 0) {
                     question.append("√");
+                    juniorSymbolExist=true;
+
                     RadicalNum--;
                 }
                 question.append(operands[i]);
                 //普通平方
                 if (addSquare && squareNum > 0) {
-                    question.append("^");
+                    question.append("²");
+                    juniorSymbolExist=true;
+
                     squareNum--;
                 }
                 if (isBracketIllegal && i == bracketEnd) {
@@ -381,7 +402,9 @@ public class GenerateQuestionsUtil {
                     question.append(")");
                     //括号外平方
                     if (outsideSquare && squareNum > 0) {
-                        question.append("^");
+                        question.append("²");
+                        juniorSymbolExist=true;
+
                         squareNum--;
                     }
                 }
