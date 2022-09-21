@@ -18,7 +18,7 @@ public class SendMailUtil {
             // 发送邮件的服务器
             mail.setHostName("smtp.qq.com");
             // 刚刚记录的授权码，是开启SMTP的密码
-            mail.setAuthentication("869083577@qq.com", "cctrczjncjyybefe");
+            mail.setAuthentication("869083577@qq.com", "mjombwgquyxkbbfd");
             // 发送邮件的邮箱和发件人
             mail.setFrom("869083577@qq.com", "KallenBlue");
             // 使用安全链接
