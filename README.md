@@ -6,7 +6,7 @@ HNU结队编程
 
 后端使用了javaweb框架，mybatis管理数据库，maven管理项目，并采用了MVC的管理模式，运行效果良好
 
-前端技术为基本的html语言加上js代码；在网页设计时采用了semantic ui进行辅助设计，自然也加入jQuery框架。form表单提交由于接口方法和form表单的兼容问题，全部改为了click后js函数，使用ajax跳转。
+前端技术为基本的html语言加上js代码；在网页设计时采用了semantic ui进行辅助设计，自然也加入jQuery框架。form表单提交由于接口方法和form表单的兼容问题，全部改为了click后调用js函数，使用ajax跳转。
 
 项目完全开源，点击这里获取[项目源码](https://github.com/KallenBlue/mvn-TestPaperGenerator)
 
