@@ -22,7 +22,7 @@ public class SendMailUtil {
             // 发送邮件的邮箱和发件人
             mail.setFrom("869083577@qq.com", "KallenBlue");
             // 使用安全链接
-            mail.setSSLOnConnect(true);
+            mail.setSSLOnConnect(false);
             // 接收的邮箱
             mail.addTo(mailAdr);
             // 邮件的主题

@@ -25,36 +25,36 @@
                         <div class="field">
                             <div class="ui left icon input">
                                 <i class="user icon"></i>
-                                <input type="text" name="account" placeholder="用户名">
+                                <input type="text" id="account" name="account" placeholder="用户名">
                             </div>
                         </div>
                         <div class="field">
                             <div class="ui left icon input">
                                 <i class="lock icon"></i>
-                                <input type="password" name="password" placeholder="密码">
+                                <input type="password" id="password" name="password" placeholder="密码">
                             </div>
                         </div>
                         <div class="field">
                             <div class="ui left icon input">
                                 <i class="lock icon"></i>
-                                <input type="password" id="repassword" placeholder="请再次输入密码">
+                                <input type="password" id="re_password" placeholder="请再次输入密码">
                             </div>
                         </div>
                         <div class="field">
                             <div class="ui left icon input">
                                 <i class="mail icon"></i>
-                                <input type="text"  placeholder="请输入邮箱">
-                                <button type="button" class="ui button" id="mail">发送验证码</button>
+                                <input type="text" id="mail" placeholder="请输入邮箱">
+                                <button type="button" class="ui button" onclick="validate()">发送验证码</button>
                             </div>
                         </div>
                         <div class="field">
                             <div class="ui left icon input">
                                 <i class="lock icon"></i>
-                                <input  name="verify" placeholder="请输入验证码">
+                                <input  name="verify" id="validate" placeholder="请输入验证码">
                             </div>
                         </div>
 
-                        <button class="ui fluid large teal submit button"  id="register">注   册</button>
+                        <button class="ui fluid large teal submit button"  id="register" onclick="register()">注   册</button>
                     </div>
 
 
@@ -89,60 +89,100 @@
     var form1 = document.getElementById('form1');
     console.log(form1);
     $("#form1").attr("target","iFrame");
-
-
-    $('.ui.form').form({
-        fields : {
-            account : {
-                identifier: 'account',
-                rules: [{
-                    type : 'empty',
-                    prompt: '请输入用户名'
-                }]
+</script>
+<script>
+    function validate(){
+        let mail=$('#mail').val();
+        $.ajax({
+            url: 'http://localhost:8088/mvn_TestPaperGenerator_war/mailCode',
+            type: "POST",
+            dataType: "json",
+            data:{
+                mail:mail
             },
-            password : {
-                identifier: 'password',
-                rules: [{
-                    type : 'empty',
-                    prompt: '请输入密码'
-                },
-                    {
-                        type   : 'minLength[6]',
-                        prompt : '密码至少6个字符'
-                    },
-                    {
-                        type   : 'maxLength[10]',
-                        prompt : '密码至多10个字符'
+            success: function (JsonResult) {
+                if(JsonResult.code==200){
+                    alert("验证码已发送,请注意查收")
+                }
+                else if (JsonResult.code==201){
+                    alert("验证码获取失败,请重新获取")
+                }
+                else if (JsonResult.code==202){
+                    alert("服务器出错,请重新获取")
+                }
+            },
+            error: function (error) {
+                console.log(error)
+            }
+        });
+    }
+</script>
+<script>
+    /*ajax可行版本*/
+    function register() {
+        let acccount = $("#account").val();
+        let password = $("#password").val();
+        let re_password = $("#password").val();
+        let validate = $("#validate").val();
+        let flag=0;
+        if(new_password!=re_password){
+            alert("两次密码输入不一致")
+        }else{
+            if(new_password.length<6){
+                alert("密码最少6个字节")
+            }else{
+                if(new_password.length>10){
+                    alert("密码最多10个字节")
+                }else{
+                    let flag1=0;
+                    let flag2=0;
+                    let flag3=0;
+                    for(let i=0;i<new_password.length;i++){
+                        let strCode = new_password.charCodeAt(i);
+                        if(new_password[i]-'0'>=0 && new_password[i]-'9'<=0) flag1=1;
+                        if(strCode >= 97 && strCode <= 122) flag2=1;
+                        if(strCode >= 65 && strCode <= 90) flag3=1;
                     }
-                ]
-            },
-            repassword : {
-                identifier: 'repassword',
-                rules: [{
-                    type : 'empty',
-                    prompt: '请再次输入密码'
-                },
-                    {
-                        type: 'match[password]',
-                        prompt: '两次密码不一样'
-                    }]
-            },
-            mail : {
-                identifier: 'mail',
-                rules: [{
-                    type : 'empty',
-                    prompt: '请输入邮箱'
-                }]
-            },
-            verify : {
-                identifier: 'verify',
-                rules: [{
-                    type : 'empty',
-                    prompt: '请输入验证码'
-                }]
+                    let num=flag1+flag2+flag3
+                    if(num==3){flag=1}
+                    else{
+                        if(flag1==0) alert("密码需要包含数字")
+                        else if(flag2==0) alert("密码需要包含小写字母")
+                        else if(flag3==0) alert("密码需要包含大写字母")
+                    }
+                }
             }
         }
-    });
+
+        if(flag==1){
+            $.ajax({
+                url: 'http://localhost:8088/mvn_TestPaperGenerator_war/ChangePassword',
+                type: "POST",
+                dataType: "json",
+                data:{
+                    origin_password:origin_password,
+                    new_password:new_password
+                },
+                success: function (JsonResult) {
+                    if(JsonResult.code==200){
+                        alert("密码修改成功")
+                        window.location.href='choose.html'
+                    }
+                    else if (JsonResult.code==202){
+                        alert("新密码与原密码相同,请重新输入")
+                    }
+                    else if (JsonResult.code==201){
+                        alert("密码错误请重新输入")
+                    }
+                },
+                error: function (error) {
+                    console.log(error)
+                }
+            });
+        }
+
+
+    }
 </script>
 
 </body>
