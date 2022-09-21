@@ -100,8 +100,8 @@ footer{
     line-height: 1.8;
     font-size: 20px;
 }
-.m-text-large{
-    font-size: 20px;
+.m-text-large-question{
+    font-size: 30px;
     font-weight: 400 !important;
     letter-spacing: 2px !important;
     line-height: 2.8;
